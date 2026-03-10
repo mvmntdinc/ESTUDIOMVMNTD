@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio MVMNTD | Franco Trapboy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Syncopate:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --card-bg: #111111;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent-color: #8B5CF6; /* Violeta Intenso */
+            --accent-glow: rgba(139, 92, 246, 0.5);
+            --pix-color: #00dfd0; 
+            --gold: #FFD700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 50% -20%, #1e1e1e 0%, #050505 80%);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 15px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        header h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.5rem, 8vw, 2.5rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo para Mobile: remover hover pesado e focar no toque */
+        @media (hover: hover) {
+            .card:hover {
+                transform: translateY(-8px);
+                border-color: var(--accent-color);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            }
+        }
+
+        .card.premium {
+            border: 1px solid var(--accent-color);
+            background: linear-gradient(145deg, #111111 0%, #170d2b 100%);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: -35px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            font-size: 0.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-align: left;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .price-container {
+            margin-bottom: 25px;
+        }
+
+        .price-pix {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .price-pix span.currency {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .price-pix-label {
+            color: var(--pix-color);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .price-card {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+        }
+
+        .features-list {
+            list-style: none;
+            flex-grow: 1;
+            margin-top: 15px;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list li svg {
+            color: var(--accent-color);
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px;
+            margin-top: 25px;
+            background-color: var(--text-main);
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: transform 0.2s active;
+        }
+
+        .premium .btn {
+            background-color: var(--accent-color);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .brinde {
+            color: var(--gold) !important;
+            font-weight: 700;
+        }
+
+        footer {
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        /* Ajustes específicos para telas muito pequenas */
+        @media (max-width: 360px) {
+            .pricing-container {
+                grid-template-columns: 1fr;
+            }
+            .price-pix { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ESTÚDIO MVMNTD</h1>
+        <p>Trap • Funk • Rap • R&B</p>
+    </header>
+
+    <main class="pricing-container">
+        
+        <!-- Pacote 1 -->
+        <div class="card">
+            <h2 class="card-title">Mixagem &<br>Masterização</h2>
+            <div class="price-container">
+                <div class="price-pix">
+                    <span class="currency">R$</span>249
+                </div>
+                <div class="price-pix-label">No Pix</div>
+                <div class="price-card">Cartão: R$ 300</div>
+            </div>
+            <ul class="features-list">
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Mix Profissional
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Masterização High-End
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Até 2 Recalls (Ajustes)
+                </li>
+            </ul>
+            <a href="https://wa.me/5521982629968?text=Salve+Franco!+Tenho+interesse+no+pacote+de+Mix+e+Masterização.+Como+podemos+prosseguir?" class="btn">Solicitar Serviço</a>
+        </div>
+
+        <!-- Pacote 2 -->
+        <div class="card">
+            <h2 class="card-title">Produção Vocal<br>(Gravação)</h2>
+            <div class="price-container">
+                <div class="price-pix">
+                    <span class="currency">R$</span>350
+                </div>
+                <div class="price-pix-label">No Pix</div>
+                <div class="price-card">Cartão: R$ 400</div>
+            </div>
+            <ul class="features-list">
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Captação de Voz (Sessão)
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Direção Artística de Voz
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Tuning e Edição Vocal
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Mix & Master inclusas
+                </li>
+            </ul>
+            <a href="https://wa.me/5521982629968?text=Fala+Franco!+Quero+agendar+uma+sessão+de+Produção+Vocal.+Quais+horários+tem+disponível?" class="btn">Agendar Sessão</a>
+        </div>
+
+        <!-- Pacote 3 -->
+        <div class="card premium">
+            <div class="badge">Vendido</div>
+            <h2 class="card-title">Produção<br>Completa (Full)</h2>
+            <div class="price-container">
+                <div class="price-pix">
+                    <span class="currency">R$</span>479
+                </div>
+                <div class="price-pix-label">No Pix</div>
+                <div class="price-card">Cartão: R$ 549</div>
+            </div>
+            <ul class="features-list">
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Beat Exclusivo sob medida
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Captação + Direção Total
+                </li>
+                <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Mix & Master (Stems)
+                </li>
+                <li class="brinde">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Arte da Capa (Brinde)
+                </li>
+            </ul>
+            <a href="https://wa.me/5521982629968?text=Eai+Franco!+Fechei+com+o+pacote+Produção+Completa.+Vamos+trocar+uma+ideia+sobre+o+Beat+Exclusivo?" class="btn">Iniciar Projeto</a>
+        </div>
+
+    </main>
+
+    <footer>
+        &copy; 2024 Estúdio MVMNTD • Rio de Janeiro<br>Franco Trapboy
+    </footer>
+
+</body>
+</html>
