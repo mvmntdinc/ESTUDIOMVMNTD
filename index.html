@@ -1,370 +1,773 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estúdio MVMNTD | Franco Trapboy</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Syncopate:wght@400;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Estúdio MVMNTD | Franco Trapboy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --card: #111;
+  --border: #1e1e1e;
+  --accent: #8B5CF6;
+  --accent2: #00dfd0;
+  --gold: #FFD700;
+  --white: #fff;
+  --muted: #666;
+  --light: #aaa;
+}
 
-        :root {
-            --bg-color: #050505;
-            --card-bg: #111111;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-            --accent-color: #8B5CF6; /* Violeta Intenso */
-            --accent-glow: rgba(139, 92, 246, 0.5);
-            --pix-color: #00dfd0; 
-            --gold: #FFD700;
-        }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-        body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at 50% -20%, #1e1e1e 0%, #050505 80%);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 15px;
-            min-height: 100vh;
-        }
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 24px 48px;
+  position: relative;
+  overflow: hidden;
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            width: 100%;
-        }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,92,246,.25) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0,223,208,.12) 0%, transparent 60%);
+  z-index: 0;
+}
 
-        header h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(1.5rem, 8vw, 2.5rem);
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px var(--accent-glow);
-        }
+.noise {
+  position: absolute;
+  inset: 0;
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  z-index: 0;
+}
 
-        header p {
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-weight: 400;
-        }
+.hero-content { position: relative; z-index: 1; }
 
-        .pricing-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1100px;
-            width: 100%;
-            margin-bottom: 60px;
-        }
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--accent2);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp .6s .1s forwards;
+}
 
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px 25px;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-            border: 1px solid #222;
-            position: relative;
-            overflow: hidden;
-        }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 22vw, 110px);
+  line-height: .92;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp .6s .2s forwards;
+}
 
-        @media (hover: hover) {
-            .card:hover {
-                transform: translateY(-8px);
-                border-color: var(--accent-color);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
-            }
-        }
+.hero-title em {
+  font-style: normal;
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+}
 
-        .card.premium {
-            border: 1px solid var(--accent-color);
-            background: linear-gradient(145deg, #111111 0%, #170d2b 100%);
-        }
+.hero-sub {
+  font-size: 15px;
+  color: var(--light);
+  line-height: 1.6;
+  margin-bottom: 36px;
+  max-width: 320px;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp .6s .3s forwards;
+}
 
-        .badge {
-            position: absolute;
-            top: 12px;
-            right: -35px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 4px 40px;
-            transform: rotate(45deg);
-            font-size: 0.6rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+.hero-sub strong { color: var(--white); font-weight: 700; }
 
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 900;
-            text-align: left;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.2;
-        }
+.cta-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  padding: 20px 28px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform .15s, box-shadow .15s;
+  box-shadow: 0 0 40px rgba(139,92,246,.35);
+  opacity: 0;
+  animation: fadeUp .6s .4s forwards;
+}
 
-        .price-container {
-            margin-bottom: 25px;
-        }
+.cta-primary:active { transform: scale(.97); }
 
-        .price-pix {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: var(--text-main);
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
+.cta-arrow {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
 
-        .price-pix span.currency {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
+.scroll-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: fadeIn 1s 1.2s forwards;
+  z-index: 1;
+}
 
-        .price-pix-label {
-            color: var(--pix-color);
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
+.scroll-hint span { font-size: 9px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
+.scroll-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); animation: bounce 1.4s infinite; }
 
-        .price-card {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid #222;
-            padding-top: 15px;
-        }
+/* ── TRUST BAR ── */
+.trust-bar {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.trust-bar::-webkit-scrollbar { display: none; }
 
-        .features-list {
-            list-style: none;
-            flex-grow: 1;
-            margin-top: 15px;
-        }
+.trust-item {
+  flex: 1;
+  min-width: 110px;
+  padding: 20px 16px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.trust-item:last-child { border-right: none; }
 
-        .features-list li {
-            margin-bottom: 10px;
-            font-size: 0.85rem;
-            color: #ccc;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.trust-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.trust-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
 
-        .features-list li svg {
-            color: var(--accent-color);
-            flex-shrink: 0;
-        }
+/* ── SECTION SHARED ── */
+section { padding: 60px 24px; }
 
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 18px;
-            margin-top: 25px;
-            background-color: var(--text-main);
-            color: #000;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            transition: transform 0.2s active;
-        }
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--accent2);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
 
-        .premium .btn {
-            background-color: var(--accent-color);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-        }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 12vw, 56px);
+  line-height: 1;
+  margin-bottom: 32px;
+}
 
-        .btn:active {
-            transform: scale(0.96);
-        }
+/* ── DORES / PROBLEMA ── */
+.pain-section { background: #0c0c0c; }
 
-        /* Seção de Portfólio / Spotify */
-        .portfolio-section {
-            width: 100%;
-            max-width: 900px;
-            margin-top: 20px;
-            text-align: center;
-        }
+.pain-list { display: flex; flex-direction: column; gap: 12px; }
 
-        .portfolio-title {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 4px;
-            margin-bottom: 25px;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
+.pain-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: var(--card);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
 
-        .spotify-container {
-            width: 100%;
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 15px;
-            border: 1px solid #222;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+.pain-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(139,92,246,.12);
+  border: 1px solid rgba(139,92,246,.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
 
-        .brinde {
-            color: var(--gold) !important;
-            font-weight: 700;
-        }
+.pain-text { font-size: 14px; color: var(--light); line-height: 1.5; padding-top: 8px; }
+.pain-text strong { color: var(--white); font-weight: 700; }
 
-        footer {
-            margin-top: 50px;
-            color: var(--text-muted);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: center;
-        }
+/* ── PACOTES ── */
+.packages-section {}
 
-        @media (max-width: 360px) {
-            .pricing-container {
-                grid-template-columns: 1fr;
-            }
-            .price-pix { font-size: 2.2rem; }
-        }
-    </style>
+.pkg-grid { display: flex; flex-direction: column; gap: 16px; }
+
+.pkg-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.pkg-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(145deg, #111 0%, #170d2b 100%);
+}
+
+.pkg-card.featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+
+.pkg-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.pkg-badge.sold {
+  background: rgba(255,215,0,.15);
+  color: var(--gold);
+  border: 1px solid rgba(255,215,0,.3);
+}
+
+.pkg-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.pkg-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.pkg-currency { font-size: 14px; color: var(--accent); font-weight: 700; }
+.pkg-amount { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; }
+.pkg-period { font-size: 12px; color: var(--muted); }
+
+.pkg-pix-label {
+  font-size: 11px;
+  color: var(--accent2);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.pkg-card-price {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+
+.pkg-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--light);
+  line-height: 1.4;
+}
+
+.check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(139,92,246,.15);
+  border: 1px solid rgba(139,92,246,.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.check svg { width: 10px; height: 10px; stroke: var(--accent); }
+
+.check.gold-check {
+  background: rgba(255,215,0,.1);
+  border-color: rgba(255,215,0,.3);
+}
+.check.gold-check svg { stroke: var(--gold); }
+
+.pkg-features .brinde { color: var(--gold); font-weight: 500; }
+
+.pkg-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 18px;
+  background: var(--white);
+  color: #000;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform .15s;
+}
+
+.featured .pkg-cta {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(139,92,246,.3);
+}
+
+.pkg-cta:active { transform: scale(.97); }
+
+/* ── PORTFÓLIO ── */
+.portfolio-section { background: #0a0a0a; padding-bottom: 40px; }
+
+.spotify-wrap {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid var(--border);
+}
+
+/* ── PROCESSO ── */
+.process-section {}
+
+.process-steps { display: flex; flex-direction: column; gap: 0; }
+
+.process-step {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.process-step:last-child { border-bottom: none; }
+
+.step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px;
+  color: var(--border);
+  line-height: 1;
+  min-width: 48px;
+  transition: color .3s;
+}
+
+.step-content {}
+.step-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* ── CTA FINAL ── */
+.cta-section {
+  background: linear-gradient(180deg, #0a0a0a 0%, #0f0520 100%);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139,92,246,.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section .section-title { font-size: clamp(40px, 14vw, 72px); }
+.cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; line-height: 1.6; }
+
+.cta-big {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 16px;
+  padding: 22px 28px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 60px rgba(139,92,246,.4);
+  transition: transform .15s;
+}
+
+.cta-big:active { transform: scale(.97); }
+
+.cta-note { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 32px 24px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+footer p { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; line-height: 2; }
+
+/* ── STICKY BOTTOM BAR ── */
+.sticky-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 12px 20px 20px;
+  background: linear-gradient(0deg, rgba(8,8,8,1) 60%, transparent);
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.sticky-bar.visible { opacity: 1; pointer-events: all; }
+
+.sticky-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 18px;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 -4px 40px rgba(139,92,246,.3);
+  transition: transform .15s;
+}
+.sticky-cta:active { transform: scale(.97); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .5s, transform .5s;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (min-width: 600px) {
+  .pkg-grid { flex-direction: row; flex-wrap: wrap; }
+  .pkg-card { flex: 1; min-width: 260px; }
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>ESTÚDIO MVMNTD</h1>
-        <p>Trap • Funk • Rap • R&B</p>
-    </header>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="noise"></div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Rio de Janeiro · Estúdio Profissional</p>
+    <h1 class="hero-title">MVMNTD<br><em>STUDIO</em></h1>
+    <p class="hero-sub">
+      Sua música merece um <strong>som que para as pessoas</strong>.<br>
+      Trap · Funk · Rap · R&B — do zero ao lançamento.
+    </p>
+    <a href="https://wa.me/5521982629968?text=Salve+Franco!+Quero+saber+mais+sobre+os+pacotes+do+estúdio." class="cta-primary">
+      Falar com Franco
+      <span class="cta-arrow">↗</span>
+    </a>
+  </div>
+</section>
 
-    <main class="pricing-container">
-        
-        <!-- Pacote 1 -->
-        <div class="card">
-            <h2 class="card-title">Mixagem &<br>Masterização</h2>
-            <div class="price-container">
-                <div class="price-pix">
-                    <span class="currency">R$</span>249
-                </div>
-                <div class="price-pix-label">No Pix</div>
-                <div class="price-card">Cartão: R$ 300</div>
-            </div>
-            <ul class="features-list">
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Mix Profissional
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Masterização High-End
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Até 2 Recalls (Ajustes)
-                </li>
-            </ul>
-            <a href="https://wa.me/5521982629968?text=Salve+Franco!+Tenho+interesse+no+pacote+de+Mix+e+Masterização.+Como+podemos+prosseguir?" class="btn">Solicitar Serviço</a>
-        </div>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-num">+100</div>
+    <div class="trust-label">Faixas prontas</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">4K</div>
+    <div class="trust-label">Qualidade</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">24h</div>
+    <div class="trust-label">Retorno rápido</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-num">RJ</div>
+    <div class="trust-label">Baseado no Rio</div>
+  </div>
+</div>
 
-        <!-- Pacote 2 -->
-        <div class="card">
-            <h2 class="card-title">Produção Vocal<br>(Gravação)</h2>
-            <div class="price-container">
-                <div class="price-pix">
-                    <span class="currency">R$</span>350
-                </div>
-                <div class="price-pix-label">No Pix</div>
-                <div class="price-card">Cartão: R$ 400</div>
-            </div>
-            <ul class="features-list">
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Captação de Voz (Sessão)
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Direção Artística de Voz
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Tuning e Edição Vocal
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Mix & Master inclusas
-                </li>
-            </ul>
-            <a href="https://wa.me/5521982629968?text=Fala+Franco!+Quero+agendar+uma+sessão+de+Produção+Vocal.+Quais+horários+tem+disponível?" class="btn">Agendar Sessão</a>
-        </div>
+<!-- PROBLEMA -->
+<section class="pain-section reveal">
+  <p class="section-label">O problema</p>
+  <h2 class="section-title">SUA MÚ­SI­CA<br>MERE­CE MAIS</h2>
+  <div class="pain-list">
+    <div class="pain-item">
+      <div class="pain-icon">🎙</div>
+      <p class="pain-text"><strong>Gravou em lugar ruim</strong> e o áudio ficou com ruído, eco ou falta de presença.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon">🎚</div>
+      <p class="pain-text"><strong>Mix caseiro</strong> que não compete com as músicas do Spotify.</p>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon">🎯</div>
+      <p class="pain-text"><strong>Perdeu oportunidades</strong> porque o som não reflete o seu nível real.</p>
+    </div>
+  </div>
+</section>
 
-        <!-- Pacote 3 -->
-        <div class="card premium">
-            <div class="badge">Vendido</div>
-            <h2 class="card-title">Produção<br>Completa (Full)</h2>
-            <div class="price-container">
-                <div class="price-pix">
-                    <span class="currency">R$</span>479
-                </div>
-                <div class="price-pix-label">No Pix</div>
-                <div class="price-card">Cartão: R$ 549</div>
-            </div>
-            <ul class="features-list">
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Beat Exclusivo sob medida
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Captação + Direção Total
-                </li>
-                <li>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Mix & Master (Stems)
-                </li>
-                <li class="brinde">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Arte da Capa (Brinde)
-                </li>
-            </ul>
-            <a href="https://wa.me/5521982629968?text=Eai+Franco!+Fechei+com+o+pacote+Produção+Completa.+Vamos+trocar+uma+ideia+sobre+o+Beat+Exclusivo?" class="btn">Iniciar Projeto</a>
-        </div>
-    </main>
+<!-- PACOTES -->
+<section class="packages-section reveal">
+  <p class="section-label">Pacotes</p>
+  <h2 class="section-title">ESCO­LHA<br>SEU PLANO</h2>
 
-    <!-- Seção de Portfólio Spotify -->
-    <section class="portfolio-section">
-        <h3 class="portfolio-title">Ouça nossas produções</h3>
-        <div class="spotify-container">
-            <!-- COLOQUE SEU EMBED DO SPOTIFY ABAIXO DESTA LINHA -->
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0kcn6T6XRfP3q00cBAsdf0?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            <!-- FIM DO EMBED -->
-        </div>
-    </section>
+  <div class="pkg-grid">
 
-    <footer>
-        &copy; 2026 Estúdio MVMNTD • Rio de Janeiro<br>Franco Trapboy
-    </footer>
+    <!-- Mix & Master -->
+    <div class="pkg-card">
+      <h3 class="pkg-name">MIX &<br>MASTER</h3>
+      <div class="pkg-price-row">
+        <span class="pkg-currency">R$</span>
+        <span class="pkg-amount">249</span>
+      </div>
+      <p class="pkg-pix-label">no pix</p>
+      <p class="pkg-card-price">Cartão: R$ 300</p>
+      <ul class="pkg-features">
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Mix profissional completo
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Masterização high-end
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Até 2 recalls (ajustes)
+        </li>
+      </ul>
+      <a href="https://wa.me/5521982629968?text=Salve+Franco!+Quero+o+pacote+Mix+e+Masterização+por+R$249.+Como+funciona?" class="pkg-cta">Solicitar serviço</a>
+    </div>
+
+    <!-- Produção Vocal -->
+    <div class="pkg-card">
+      <h3 class="pkg-name">PRODUÇÃO<br>VOCAL</h3>
+      <div class="pkg-price-row">
+        <span class="pkg-currency">R$</span>
+        <span class="pkg-amount">350</span>
+      </div>
+      <p class="pkg-pix-label">no pix</p>
+      <p class="pkg-card-price">Cartão: R$ 400</p>
+      <ul class="pkg-features">
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Captação de voz (sessão completa)
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Direção artística de voz
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Tuning e edição vocal
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Mix & Master inclusas
+        </li>
+      </ul>
+      <a href="https://wa.me/5521982629968?text=Fala+Franco!+Quero+agendar+uma+sessão+de+Produção+Vocal.+Quais+horários+disponíveis?" class="pkg-cta">Agendar sessão</a>
+    </div>
+
+    <!-- Full -->
+    <div class="pkg-card featured">
+      <span class="pkg-badge sold">Mais vendido</span>
+      <h3 class="pkg-name">PRODUÇÃO<br>COMPLETA</h3>
+      <div class="pkg-price-row">
+        <span class="pkg-currency">R$</span>
+        <span class="pkg-amount">479</span>
+      </div>
+      <p class="pkg-pix-label">no pix</p>
+      <p class="pkg-card-price">Cartão: R$ 549</p>
+      <ul class="pkg-features">
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Beat exclusivo sob medida
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Captação + direção total
+        </li>
+        <li>
+          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          Mix & Master com stems
+        </li>
+        <li>
+          <span class="check gold-check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
+          <span class="brinde">Arte da capa inclusa (brinde)</span>
+        </li>
+      </ul>
+      <a href="https://wa.me/5521982629968?text=Eai+Franco!+Quero+fechar+o+pacote+Produção+Completa.+Vamos+conversar+sobre+o+beat?" class="pkg-cta">Iniciar projeto</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section class="portfolio-section reveal">
+  <p class="section-label">Portfólio</p>
+  <h2 class="section-title">OUÇA<br>O RESULTADO</h2>
+  <div class="spotify-wrap">
+    <iframe style="border-radius:10px" src="https://open.spotify.com/embed/playlist/0kcn6T6XRfP3q00cBAsdf0?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="process-section reveal">
+  <p class="section-label">Como funciona</p>
+  <h2 class="section-title">DO ZERO<br>AO LANÇA­MENTO</h2>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <p class="step-title">Me chama no WhatsApp</p>
+        <p class="step-desc">A gente conversa sobre sua ideia, referências e qual pacote faz mais sentido pra você.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <p class="step-title">Agendamos a sessão</p>
+        <p class="step-desc">Data marcada, estúdio preparado. Você só aparece pronto pra gravar.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <p class="step-title">Gravação e produção</p>
+        <p class="step-desc">Captação profissional, direção artística e edição completa no mesmo lugar.</p>
+      </div>
+    </div>
+    <div class="process-step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <p class="step-title">Entrega e ajustes</p>
+        <p class="step-desc">Você recebe o arquivo pronto. Até 2 recalls inclusos pra garantir que ficou perfeito.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section reveal">
+  <p class="section-label">Próximo passo</p>
+  <h2 class="section-title">PRONTI<br>PRA GRAVAR?</h2>
+  <p class="cta-sub">Vagas limitadas por mês.<br>Garante a sua agora e sai daqui com uma faixa no nível.</p>
+  <a href="https://wa.me/5521982629968?text=Salve+Franco!+Quero+garantir+minha+vaga+no+estúdio.+Quais+horários+disponíveis?" class="cta-big">
+    Falar com Franco agora
+    <span class="cta-arrow">↗</span>
+  </a>
+  <p class="cta-note">Resposta em até 1 hora · WhatsApp</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Estúdio MVMNTD · Rio de Janeiro</p>
+  <p>Franco Trapboy</p>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <a href="https://wa.me/5521982629968?text=Salve+Franco!+Vim+pelo+site+e+quero+saber+mais." class="sticky-cta">
+    Falar com Franco ↗
+  </a>
+</div>
+
+<script>
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+// Sticky bar after hero
+const hero = document.querySelector('.hero');
+const bar = document.getElementById('stickyBar');
+const heroObs = new IntersectionObserver((entries) => {
+  bar.classList.toggle('visible', !entries[0].isIntersecting);
+}, { threshold: 0 });
+heroObs.observe(hero);
+</script>
 
 </body>
 </html>
