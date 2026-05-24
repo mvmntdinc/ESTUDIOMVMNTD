@@ -1,790 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1278635117687288');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1278635117687288&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Estúdio MVMNTD | Franco Trapboy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #080808;
-  --card: #111;
-  --border: #1e1e1e;
-  --accent: #8B5CF6;
-  --accent2: #00dfd0;
-  --gold: #FFD700;
-  --white: #fff;
-  --muted: #666;
-  --light: #aaa;
-}
-
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-
-body {
-  background: var(--bg);
-  color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* ── HERO ── */
-.hero {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 40px 24px 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139,92,246,.25) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0,223,208,.12) 0%, transparent 60%);
-  z-index: 0;
-}
-
-.noise {
-  position: absolute;
-  inset: 0;
-  opacity: .04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  z-index: 0;
-}
-
-.hero-content { position: relative; z-index: 1; }
-
-.hero-eyebrow {
-  font-size: 11px;
-  letter-spacing: 4px;
-  color: var(--accent2);
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-bottom: 16px;
-  opacity: 0;
-  animation: fadeUp .6s .1s forwards;
-}
-
-.hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(64px, 22vw, 110px);
-  line-height: .92;
-  letter-spacing: -1px;
-  margin-bottom: 24px;
-  opacity: 0;
-  animation: fadeUp .6s .2s forwards;
-}
-
-.hero-title em {
-  font-style: normal;
-  -webkit-text-stroke: 1.5px var(--accent);
-  color: transparent;
-}
-
-.hero-sub {
-  font-size: 15px;
-  color: var(--light);
-  line-height: 1.6;
-  margin-bottom: 36px;
-  max-width: 320px;
-  font-weight: 300;
-  opacity: 0;
-  animation: fadeUp .6s .3s forwards;
-}
-
-.hero-sub strong { color: var(--white); font-weight: 700; }
-
-.cta-primary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 360px;
-  padding: 20px 28px;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: transform .15s, box-shadow .15s;
-  box-shadow: 0 0 40px rgba(139,92,246,.35);
-  opacity: 0;
-  animation: fadeUp .6s .4s forwards;
-}
-
-.cta-primary:active { transform: scale(.97); }
-
-.cta-arrow {
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-}
-
-.scroll-hint {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: 0;
-  animation: fadeIn 1s 1.2s forwards;
-  z-index: 1;
-}
-
-.scroll-hint span { font-size: 9px; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; }
-.scroll-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); animation: bounce 1.4s infinite; }
-
-/* ── TRUST BAR ── */
-.trust-bar {
-  display: flex;
-  gap: 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.trust-bar::-webkit-scrollbar { display: none; }
-
-.trust-item {
-  flex: 1;
-  min-width: 110px;
-  padding: 20px 16px;
-  text-align: center;
-  border-right: 1px solid var(--border);
-}
-.trust-item:last-child { border-right: none; }
-
-.trust-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  color: var(--accent);
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.trust-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
-
-/* ── SECTION SHARED ── */
-section { padding: 60px 24px; }
-
-.section-label {
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: var(--accent2);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-
-.section-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px, 12vw, 56px);
-  line-height: 1;
-  margin-bottom: 32px;
-}
-
-/* ── DORES / PROBLEMA ── */
-.pain-section { background: #0c0c0c; }
-
-.pain-list { display: flex; flex-direction: column; gap: 12px; }
-
-.pain-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 16px;
-  background: var(--card);
-  border-radius: 12px;
-  border: 1px solid var(--border);
-}
-
-.pain-icon {
-  width: 36px; height: 36px;
-  border-radius: 10px;
-  background: rgba(139,92,246,.12);
-  border: 1px solid rgba(139,92,246,.2);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.pain-text { font-size: 14px; color: var(--light); line-height: 1.5; padding-top: 8px; }
-.pain-text strong { color: var(--white); font-weight: 700; }
-
-/* ── PACOTES ── */
-.packages-section {}
-
-.pkg-grid { display: flex; flex-direction: column; gap: 16px; }
-
-.pkg-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px 24px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color .2s;
-}
-
-.pkg-card.featured {
-  border-color: var(--accent);
-  background: linear-gradient(145deg, #111 0%, #170d2b 100%);
-}
-
-.pkg-card.featured::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-}
-
-.pkg-badge {
-  display: inline-block;
-  background: var(--accent);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-
-.pkg-badge.sold {
-  background: rgba(255,215,0,.15);
-  color: var(--gold);
-  border: 1px solid rgba(255,215,0,.3);
-}
-
-.pkg-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 30px;
-  line-height: 1;
-  margin-bottom: 20px;
-}
-
-.pkg-price-row {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.pkg-currency { font-size: 14px; color: var(--accent); font-weight: 700; }
-.pkg-amount { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; }
-.pkg-period { font-size: 12px; color: var(--muted); }
-
-.pkg-pix-label {
-  font-size: 11px;
-  color: var(--accent2);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
-}
-
-.pkg-card-price {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
-}
-
-.pkg-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-
-.pkg-features li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--light);
-  line-height: 1.4;
-}
-
-.check {
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: rgba(139,92,246,.15);
-  border: 1px solid rgba(139,92,246,.3);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.check svg { width: 10px; height: 10px; stroke: var(--accent); }
-
-.check.gold-check {
-  background: rgba(255,215,0,.1);
-  border-color: rgba(255,215,0,.3);
-}
-.check.gold-check svg { stroke: var(--gold); }
-
-.pkg-features .brinde { color: var(--gold); font-weight: 500; }
-
-.pkg-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 18px;
-  background: var(--white);
-  color: #000;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: transform .15s;
-}
-
-.featured .pkg-cta {
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 8px 30px rgba(139,92,246,.3);
-}
-
-.pkg-cta:active { transform: scale(.97); }
-
-/* ── PORTFÓLIO ── */
-.portfolio-section { background: #0a0a0a; padding-bottom: 40px; }
-
-.spotify-wrap {
-  background: var(--card);
-  border-radius: 20px;
-  padding: 16px;
-  border: 1px solid var(--border);
-}
-
-/* ── PROCESSO ── */
-.process-section {}
-
-.process-steps { display: flex; flex-direction: column; gap: 0; }
-
-.process-step {
-  display: flex;
-  gap: 16px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border);
-}
-.process-step:last-child { border-bottom: none; }
-
-.step-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 48px;
-  color: var(--border);
-  line-height: 1;
-  min-width: 48px;
-  transition: color .3s;
-}
-
-.step-content {}
-.step-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-.step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
-
-/* ── CTA FINAL ── */
-.cta-section {
-  background: #0a0a0a;
-  padding: 80px 24px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: -60px; left: 50%;
-  transform: translateX(-50%);
-  width: 300px; height: 300px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139,92,246,.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.cta-section .section-title { font-size: clamp(40px, 14vw, 72px); }
-.cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; line-height: 1.6; }
-
-.cta-big {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 360px;
-  margin: 0 auto 16px;
-  padding: 22px 28px;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 16px;
-  font-weight: 700;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 0 60px rgba(139,92,246,.4);
-  transition: transform .15s;
-}
-
-.cta-big:active { transform: scale(.97); }
-
-.cta-note { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
-
-/* ── FOOTER ── */
-footer {
-  padding: 32px 24px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-
-footer p { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; line-height: 2; }
-
-/* ── STICKY BOTTOM BAR ── */
-.sticky-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  padding: 12px 20px 20px;
-  background: linear-gradient(0deg, rgba(8,8,8,1) 60%, transparent);
-  z-index: 100;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity .3s;
-}
-
-.sticky-bar.visible { opacity: 1; pointer-events: all; }
-
-.sticky-cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 18px;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 14px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 -4px 40px rgba(139,92,246,.3);
-  transition: transform .15s;
-}
-.sticky-cta:active { transform: scale(.97); }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(20px); }
-  to { opacity:1; transform:translateY(0); }
-}
-
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .5s, transform .5s;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: none;
-}
-
-@media (min-width: 600px) {
-  .pkg-grid { flex-direction: row; flex-wrap: wrap; }
-  .pkg-card { flex: 1; min-width: 260px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estúdio Premium | Gravação, Mixagem e Masterização</title>
+    <meta name="description" content="Eleve a qualidade do seu som com pacotes de mixagem, captação e produção completa. Agende sua sessão no nosso estúdio premium.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <nav class="navbar">
+        <div class="logo">MVMNTD<span>STUDIO</span></div>
+        <ul class="nav-links">
+            <li><a href="#sobre">O Estúdio</a></li>
+            <li><a href="#servicos">Pacotes</a></li>
+        </ul>
+        <a href="#contato" class="btn btn-outline">Fale Conosco</a>
+    </nav>
+    <header class="hero">
+        <video class="hero-video-bg" autoplay muted loop playsinline>
+            <source src="assets/hero-bg.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>Sua música com qualidade de <span>Gravadora</span></h1>
+            <p>Ambiente tratado, equipamentos de ponta e engenheiros de áudio focados em fazer o seu som alcançar o próximo nível.</p>
+            <div class="hero-buttons">
+                <a href="#servicos" class="btn btn-primary">Ver Pacotes</a>
+                <a href="#contato" class="btn btn-secondary">Agendar Sessão</a>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </header>
+    <section id="sobre" class="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>A Magia Acontece Aqui</h2>
+                <p>Nosso estúdio foi projetado acusticamente para garantir a mais alta fidelidade sonora. Da captação de voz cristalina à masterização explosiva, temos a infraestrutura para materializar a sua visão artística.</p>
+                <ul class="features">
+                    <li>🎙️ Captação Cristalina</li>
+                    <li>🎛️ Equipamento Analógico & Digital</li>
+                    <li>🎧 Acústica Impecável</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <img src="assets/hero-bg.png" alt="Equipamento de Estúdio">
+            </div>
+        </div>
+    </section>
+    <section id="servicos" class="pricing">
+        <div class="pricing-header">
+            <h2>Nossos Pacotes</h2>
+            <p>Escolha a solução ideal para o seu projeto musical.</p>
+        </div>
+        <div class="pricing-cards">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="noise"></div>
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-dot"></div>
-  </div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Rio de Janeiro · Estúdio Profissional</p>
-    <h1 class="hero-title">MVMNTD<br><em>STUDIO</em></h1>
-    <p class="hero-sub">
-      Sua música merece um <strong>som que para as pessoas</strong>.<br>
-      Trap · Funk · Rap · R&B — do zero ao lançamento.
-    </p>
-    <a href="https://wa.me/5521982629968?text=Salve+Franco!+Quero+saber+mais+sobre+os+pacotes+do+estúdio." class="cta-primary">
-      Entrar em contato
-      <span class="cta-arrow">↗</span>
-    </a>
-  </div>
-</section>
+            <!-- Pacote 1 -->
+            <div class="card">
+                <h3>Mixagem</h3>
+                <div class="price">R$ 250<span>/faixa</span></div>
+                <p class="desc">Perfeito para quem já gravou e produziu e precisa do polimento final para as plataformas.</p>
+                <ul class="features">
+                    <li>Equilíbrio de Frequências</li>
+                    <li>Compressão e EQs precisos</li>
+                    <li>Efeitos (Reverb, Delay)</li>
+                    <li>Entrega em WAV e MP3 Alta Res.</li>
+                    <li>2 Revisões Inclusas</li>
+                </ul>
+                <a href="https://wa.me/5521982629968?text=Olá,%20gostaria%20de%20fechar%20o%20pacote%20de%20Mixagem" class="btn btn-block btn-outline" target="_blank">Agendar Mixagem</a>
+            </div>
+            <!-- Pacote 2 (Destaque) -->
+            <div class="card popular">
+                <div class="badge">Mais Vendido</div>
+                <h3>Mix + Captação</h3>
+                <div class="price">R$ 350<span>/faixa</span></div>
+                <p class="desc">Venha gravar no estúdio com nossos equipamentos premium e saia com a faixa mixada.</p>
+                <ul class="features">
+                    <li><strong>Até 3 horas de estúdio</strong></li>
+                    <li>Captação com Mic Premium</li>
+                    <li>Afinação de Voz (Auto-Tune/Melodyne)</li>
+                    <li>Edição de áudio minuciosa</li>
+                    <li>Mixagem completa</li>
+                    <li>3 Revisões Inclusas</li>
+                </ul>
+                <a href="https://wa.me/5521982629968?text=Olá,%20gostaria%20de%20fechar%20o%20pacote%20de%20Mix+Captação" class="btn btn-primary btn-block" target="_blank">Agendar Gravação</a>
+            </div>
+            <!-- Pacote 3 -->
+            <div class="card premium">
+                <h3>Produção Completa</h3>
+                <div class="price">R$ 450<span>/faixa</span></div>
+                <p class="desc">Você entra com a ideia e sai com um hit. Produção instrumental, gravação, mix e master.</p>
+                <ul class="features">
+                    <li>Criação de Beat / Arranjo</li>
+                    <li>Captação de Vozes ilimitada</li>
+                    <li>Direção Artística</li>
+                    <li>Mixagem & Masterização Padrão Spotify</li>
+                    <li>Arquivos abertos (Stems)</li>
+                    <li>Revisões Ilimitadas</li>
+                </ul>
+                <a href="https://wa.me/5521982629968?text=Olá,%20gostaria%20de%20fechar%20a%20Produção%20Completa" class="btn btn-block btn-premium" target="_blank">Começar Meu Hit</a>
+            </div>
+        </div>
+    </section>
+    <section id="portfolio" class="portfolio">
+        <div class="portfolio-header">
+            <h2>Nosso Som na Prática</h2>
+            <p>Dê o play e confira o trabalho saindo direto do estúdio.</p>
+        </div>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-item">
-    <div class="trust-num">+100</div>
-    <div class="trust-label">Faixas prontas</div>
-  </div>
-  <div class="trust-item">
-    <div class="trust-num">4K</div>
-    <div class="trust-label">Qualidade</div>
-  </div>
-  <div class="trust-item">
-    <div class="trust-num">24h</div>
-    <div class="trust-label">Retorno rápido</div>
-  </div>
-  <div class="trust-item">
-    <div class="trust-num">RJ</div>
-    <div class="trust-label">Baseado no Rio</div>
-  </div>
-</div>
+        <!-- Abas -->
+        <div class="portfolio-tabs">
+            <button class="tab-btn active" data-tab="ultima">🎵 Última Produção</button>
+            <button class="tab-btn" data-tab="producoes">🎛️ Portfólio Completo</button>
+        </div>
 
-<!-- PROBLEMA -->
-<section class="pain-section reveal">
-  <p class="section-label">O problema</p>
-  <h2 class="section-title">SUA MÚ­SI­CA<br>MERE­CE MAIS</h2>
-  <div class="pain-list">
-    <div class="pain-item">
-      <div class="pain-icon">🎙</div>
-      <p class="pain-text"><strong>Gravou em lugar ruim</strong> e o áudio ficou com ruído, eco ou falta de presença.</p>
-    </div>
-    <div class="pain-item">
-      <div class="pain-icon">🎚</div>
-      <p class="pain-text"><strong>Mix caseiro</strong> que não compete com as músicas do Spotify.</p>
-    </div>
-    <div class="pain-item">
-      <div class="pain-icon">🎯</div>
-      <p class="pain-text"><strong>Perdeu oportunidades</strong> porque o som não reflete o seu nível real.</p>
-    </div>
-  </div>
-</section>
+        <!-- Última Produção -->
+        <div class="tab-content active" id="tab-ultima">
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/tL3qEV-wG_0?si=5r10_FajDXatFoXA"
+                    title="Última Produção - MVMNTD Studio"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
 
-<!-- PACOTES -->
-<section class="packages-section reveal">
-  <p class="section-label">Pacotes</p>
-  <h2 class="section-title">ESCO­LHA<br>SEU PLANO</h2>
-
-  <div class="pkg-grid">
-
-    <!-- Mix & Master -->
-    <div class="pkg-card">
-      <h3 class="pkg-name">MIX &<br>MASTER</h3>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">R$</span>
-        <span class="pkg-amount">249</span>
-      </div>
-      <p class="pkg-pix-label">no pix</p>
-      <p class="pkg-card-price">Cartão: R$ 300</p>
-      <ul class="pkg-features">
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Mix profissional completo
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Masterização high-end
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Até 2 recalls (ajustes)
-        </li>
-      </ul>
-      <a href="https://wa.me/5521982629968?text=Salve+Franco!+Quero+o+pacote+Mix+e+Masterização+por+R$249.+Como+funciona?" class="pkg-cta">Solicitar serviço</a>
-    </div>
-
-    <!-- Produção Vocal -->
-    <div class="pkg-card">
-      <h3 class="pkg-name">PRODUÇÃO<br>VOCAL</h3>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">R$</span>
-        <span class="pkg-amount">350</span>
-      </div>
-      <p class="pkg-pix-label">no pix</p>
-      <p class="pkg-card-price">Cartão: R$ 400</p>
-      <ul class="pkg-features">
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Captação de voz (sessão completa)
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Direção artística de voz
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Tuning e edição vocal
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Mix & Master inclusas
-        </li>
-      </ul>
-      <a href="https://wa.me/5521982629968?text=Fala+Franco!+Quero+agendar+uma+sessão+de+Produção+Vocal.+Quais+horários+disponíveis?" class="pkg-cta">Agendar sessão</a>
-    </div>
-
-    <!-- Full -->
-    <div class="pkg-card featured">
-      <span class="pkg-badge sold">Mais vendido</span>
-      <h3 class="pkg-name">PRODUÇÃO<br>COMPLETA</h3>
-      <div class="pkg-price-row">
-        <span class="pkg-currency">R$</span>
-        <span class="pkg-amount">479</span>
-      </div>
-      <p class="pkg-pix-label">no pix</p>
-      <p class="pkg-card-price">Cartão: R$ 549</p>
-      <ul class="pkg-features">
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Beat exclusivo sob medida
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Captação + direção total
-        </li>
-        <li>
-          <span class="check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          Mix & Master com stems
-        </li>
-        <li>
-          <span class="check gold-check"><svg viewBox="0 0 12 12" fill="none" stroke-width="2.5"><polyline points="2 6 5 9 10 3"/></svg></span>
-          <span class="brinde">Arte da capa inclusa (brinde)</span>
-        </li>
-      </ul>
-      <a href="https://wa.me/5521982629968?text=Eai+Franco!+Quero+fechar+o+pacote+Produção+Completa.+Vamos+conversar+sobre+o+beat?" class="pkg-cta">Iniciar projeto</a>
-    </div>
-
-  </div>
-</section>
-
-<!-- PORTFÓLIO -->
-<section class="portfolio-section reveal">
-  <p class="section-label">Portfólio</p>
-  <h2 class="section-title">OUÇA<br>O RESULTADO</h2>
-  <div class="spotify-wrap">
-    <iframe style="border-radius:10px" src="https://open.spotify.com/embed/playlist/0kcn6T6XRfP3q00cBAsdf0?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  </div>
-</section>
-
-<!-- PROCESSO -->
-<section class="process-section reveal">
-  <p class="section-label">Como funciona</p>
-  <h2 class="section-title">DO ZERO<br>AO LANÇA­MENTO</h2>
-  <div class="process-steps">
-    <div class="process-step">
-      <div class="step-num">01</div>
-      <div class="step-content">
-        <p class="step-title">Me chama no WhatsApp</p>
-        <p class="step-desc">A gente conversa sobre sua ideia, referências e qual pacote faz mais sentido pra você.</p>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">02</div>
-      <div class="step-content">
-        <p class="step-title">Agendamos a sessão</p>
-        <p class="step-desc">Data marcada, estúdio preparado. Você só aparece pronto pra gravar.</p>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">03</div>
-      <div class="step-content">
-        <p class="step-title">Gravação e produção</p>
-        <p class="step-desc">Captação profissional, direção artística e edição completa no mesmo lugar.</p>
-      </div>
-    </div>
-    <div class="process-step">
-      <div class="step-num">04</div>
-      <div class="step-content">
-        <p class="step-title">Entrega e ajustes</p>
-        <p class="step-desc">Você recebe o arquivo pronto. Até 2 recalls inclusos pra garantir que ficou perfeito.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<section class="cta-section reveal">
-  <p class="section-label">Próximo passo</p>
-  <h2 class="section-title">PRONTO<br>PARA GRAVAR?</h2>
-  <p class="cta-sub">Vagas limitadas por mês.<br>Garante a sua agora e sai daqui com uma faixa no nível.</p>
-  <a href="https://wa.me/5521982629968?text=Salve+Franco!+Quero+garantir+minha+vaga+no+estúdio.+Quais+horários+disponíveis?" class="cta-big">
-    Entrar em contato
-    <span class="cta-arrow">↗</span>
-  </a>
-  <p class="cta-note">Resposta em até 1 hora · WhatsApp</p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2026 Estúdio MVMNTD · Rio de Janeiro</p>
-  <p>Franco Trapboy</p>
-</footer>
-
-<!-- STICKY BAR -->
-<div class="sticky-bar" id="stickyBar">
-  <a href="https://wa.me/5521982629968?text=Salve+Franco!+Vim+pelo+site+e+quero+saber+mais." class="sticky-cta">
-    Entrar em contato ↗
-  </a>
-</div>
-
-<script>
-// Reveal on scroll
-const reveals = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-reveals.forEach(el => io.observe(el));
-
-// Sticky bar after hero
-const hero = document.querySelector('.hero');
-const bar = document.getElementById('stickyBar');
-const heroObs = new IntersectionObserver((entries) => {
-  bar.classList.toggle('visible', !entries[0].isIntersecting);
-}, { threshold: 0 });
-heroObs.observe(hero);
-</script>
-
+        <!-- Produções -->
+        <div class="tab-content" id="tab-producoes">
+            <div class="producoes-grid">
+                <p class="producoes-placeholder">Em breve mais produções aqui. 🎧</p>
+            </div>
+        </div>
+    </section>
+    <section id="orcamento" class="lead-section">
+        <div class="lead-header">
+            <h2>Fale com a Nossa Equipe</h2>
+            <p>Deixe seu contato abaixo para receber um orçamento personalizado ou tirar dúvidas.</p>
+        </div>
+        <div class="lead-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSet_VnuXucDXq75KELFVbwxow9HjT8sYZMbrFR-vBrdy_njKg/viewform?embedded=true" width="100%" height="553" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        </div>
+    </section>
+    <section id="contato" class="cta-section">
+        <h2>Pronto para elevar o seu som?</h2>
+        <p>Entre em contato conosco hoje mesmo e agende sua primeira sessão. Nossa equipe está pronta para te atender.</p>
+        <a href="https://wa.me/5521982629968" target="_blank" class="btn btn-whatsapp">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+            Chamar no WhatsApp
+        </a>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="logo">MVMNTD<span>STUDIO</span></div>
+            <p>&copy; 2026 MVMNTD Studio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
