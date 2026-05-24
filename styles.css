@@ -642,6 +642,12 @@ footer {
     .nav-links {
         display: none;
     }
+    .navbar .btn-outline {
+        display: none;
+    }
+    .navbar {
+        justify-content: center;
+    }
     .hero h1 {
         font-size: 2.5rem;
     }
