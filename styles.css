@@ -452,13 +452,9 @@ ul {
 .producoes-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-}
-.producoes-placeholder {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 1rem;
-    padding: 60px 0;
+    gap: 12px;
+    max-width: 860px;
+    margin: 0 auto;
 }
 /* Lead Form Section */
 .lead-section {
