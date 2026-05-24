@@ -538,6 +538,56 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+/* Carrossel mobile - Pacotes */
+@media (max-width: 768px) {
+    .pricing-cards {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 16px;
+        padding: 10px 24px 20px;
+        scrollbar-width: none;
+        grid-template-columns: unset;
+    }
+    .pricing-cards::-webkit-scrollbar {
+        display: none;
+    }
+    .card {
+        flex: 0 0 82vw;
+        max-width: 340px;
+        scroll-snap-align: center;
+    }
+    .card.popular {
+        transform: scale(1);
+    }
+    /* Indicadores de paginação */
+    .pricing-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+    }
+    .pricing-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .pricing-dot.active {
+        background: var(--primary-color);
+        width: 24px;
+        border-radius: 4px;
+    }
+}
+@media (min-width: 769px) {
+    .pricing-dots {
+        display: none;
+    }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .about-container {

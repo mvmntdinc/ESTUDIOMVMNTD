@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Carrossel dots - Pacotes
+    const pricingCards = document.querySelector('.pricing-cards');
+    const dots = document.querySelectorAll('.pricing-dot');
+
+    if (pricingCards && dots.length) {
+        pricingCards.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.card');
+            const scrollLeft = pricingCards.scrollLeft;
+            const cardWidth = cards[0].offsetWidth + 16;
+            const index = Math.round(scrollLeft / cardWidth);
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        });
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                const cards = document.querySelectorAll('.card');
+                const cardWidth = cards[0].offsetWidth + 16;
+                pricingCards.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+            });
+        });
+    }
+
     // Portfolio tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
