@@ -538,6 +538,44 @@ footer {
     opacity: 1;
     transform: translateY(0);
 }
+/* Setas carrossel */
+.pricing-arrows {
+    display: none;
+}
+@media (max-width: 768px) {
+    .pricing-arrows {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+    .arrow-btn {
+        background: rgba(255,255,255,0.08);
+        border: 1.5px solid rgba(255,255,255,0.15);
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+    }
+    .arrow-btn:hover {
+        background: var(--primary-color);
+        color: #000;
+        border-color: var(--primary-color);
+    }
+    .arrow-hint {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        font-family: var(--font-body);
+    }
+}
+
 /* Carrossel mobile - Pacotes */
 @media (max-width: 768px) {
     .pricing-cards {

@@ -1,23 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Carrossel dots - Pacotes
+    // Carrossel - Pacotes
     const pricingCards = document.querySelector('.pricing-cards');
     const dots = document.querySelectorAll('.pricing-dot');
+    const btnPrev = document.getElementById('arrow-prev');
+    const btnNext = document.getElementById('arrow-next');
 
-    if (pricingCards && dots.length) {
+    function getCardWidth() {
+        const card = document.querySelector('.card');
+        return card ? card.offsetWidth + 16 : 0;
+    }
+
+    function getCurrentIndex() {
+        return Math.round(pricingCards.scrollLeft / getCardWidth());
+    }
+
+    function scrollToCard(index) {
+        const cards = document.querySelectorAll('.card');
+        const i = Math.max(0, Math.min(index, cards.length - 1));
+        pricingCards.scrollTo({ left: i * getCardWidth(), behavior: 'smooth' });
+    }
+
+    if (pricingCards) {
         pricingCards.addEventListener('scroll', () => {
-            const cards = document.querySelectorAll('.card');
-            const scrollLeft = pricingCards.scrollLeft;
-            const cardWidth = cards[0].offsetWidth + 16;
-            const index = Math.round(scrollLeft / cardWidth);
+            const index = getCurrentIndex();
             dots.forEach((d, i) => d.classList.toggle('active', i === index));
         });
 
         dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                const cards = document.querySelectorAll('.card');
-                const cardWidth = cards[0].offsetWidth + 16;
-                pricingCards.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
-            });
+            dot.addEventListener('click', () => scrollToCard(i));
+        });
+
+        if (btnPrev) btnPrev.addEventListener('click', () => scrollToCard(getCurrentIndex() - 1));
+        if (btnNext) btnNext.addEventListener('click', () => scrollToCard(getCurrentIndex() + 1));
+    }
+
+    // Ao clicar em "Ver Pacotes" no mobile, scroll para o 1º card
+    const verPacotesBtn = document.querySelector('a[href="#servicos"]');
+    if (verPacotesBtn) {
+        verPacotesBtn.addEventListener('click', () => {
+            if (window.innerWidth <= 768 && pricingCards) {
+                setTimeout(() => {
+                    pricingCards.scrollTo({ left: 0, behavior: 'smooth' });
+                }, 400);
+            }
         });
     }
 
