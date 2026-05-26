@@ -94,6 +94,16 @@ ul {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
 }
+.btn-silver {
+    background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+    color: #000;
+    font-weight: 700;
+}
+.btn-silver:hover {
+    background: linear-gradient(135deg, #d0d0d0, #f0f0f0);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255,255,255,0.15);
+}
 .btn-premium {
     background: linear-gradient(135deg, var(--secondary-color), #2d88ff);
     color: #fff;
@@ -254,6 +264,48 @@ ul {
     transform: scale(1.02);
     box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 20px var(--primary-glow);
 }
+/* Prova Social */
+.social-proof {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 5%;
+    text-align: center;
+}
+.social-proof h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: #fff;
+}
+.social-proof-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.social-proof-grid img {
+    width: 260px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: var(--transition);
+}
+.social-proof-grid img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+@media (max-width: 768px) {
+    .social-proof-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .social-proof-grid img {
+        width: 100%;
+        max-width: 340px;
+    }
+}
+
 /* Pricing Section */
 .pricing {
     padding: 100px 5%;
