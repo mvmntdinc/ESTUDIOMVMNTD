@@ -425,6 +425,92 @@ ul {
 .card.premium .features li::before {
     color: var(--secondary-color);
 }
+/* Como Funciona */
+.como-funciona {
+    padding: 100px 5%;
+    background: linear-gradient(180deg, #111218 0%, var(--bg-color) 100%);
+    text-align: center;
+}
+.como-header {
+    margin-bottom: 60px;
+}
+.como-header h2 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+}
+.como-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+.como-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto 48px;
+    flex-wrap: wrap;
+}
+.step {
+    background: rgba(26, 27, 34, 0.6);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 36px 28px;
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+    transition: var(--transition);
+}
+.step:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+.step-icon {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+}
+.step-num {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+.step h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.step p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+.step-arrow {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+@media (max-width: 768px) {
+    .step-arrow {
+        display: none;
+    }
+    .como-steps {
+        flex-direction: column;
+        align-items: center;
+    }
+    .step {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
 /* Portfolio Section */
 .portfolio {
     padding: 100px 5%;
